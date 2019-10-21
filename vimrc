@@ -84,12 +84,12 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'w0rp/ale'
-Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree/'
 
 Plug 'elzr/vim-json'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 let g:SnazzyTransparent = 1
@@ -127,22 +127,15 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" ===
-" === You Complete ME
-" ===
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap g/ :YcmCompleter GetDoc<CR>
-nnoremap gt :YcmCompleter GetType<CR>
-nnoremap gr :YcmCompleter GoToReferences<CR>
-let g:ycm_autoclose_preview_window_after_completion=0
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_use_clangd = 0
-let g:ycm_python_interpreter_path = "/bin/python3"
-let g:ycm_python_binary_path = "/bin/python3"
 
-
-" ===
 " === ale
 " ===
 let b:ale_linters = ['pylint']
 let b:ale_fixers = ['autopep8', 'yapf']
+
+
+
+nmap <Leader>tb :TagbarToggle<CR>
+let g:tagbar_ctags_bin='/usr/bin/ctags' 
+let g:tagbar_width=20
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
